@@ -16,20 +16,20 @@ function createMap(Earthquake_map) {
     "Earthquake": Earthquake_map
   };
 
-  // Create the map object with options.
+  // Create the map
   let map = L.map("map-id", {
     center: [23.6345, 102.55],
     zoom: 4,
     layers: [streetmap, Earthquake_map]
   });
 
-  // Create a layer control, and pass it quakeMaps and overlayMaps. Add the layer control to the map.
+  // Add the layer control to the map.
   L.control.layers(quakemaps, overlayMaps, {
     collapsed: false
   }).addTo(map);
 }
 
-//Create the createMarkers function.
+//Create the markers function.
 function quakeMarkers(response) {
 
   //Pass to layer
@@ -40,7 +40,7 @@ function quakeMarkers(response) {
       layer.bindPopup("Magnitude: " + feature.properties.mag + "<br>Location: " + feature.properties.place);
   }
 
-  //pass above information into map 
+  //pass info into map 
   L.geoJSON(response, {
       onEachFeature,
   }).addTo(quakelayer)
@@ -51,7 +51,7 @@ function quakeMarkers(response) {
 
 const url = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/4.5_month.geojson"
 
-// Perform an API call to the Citi Bike API to get the station information. Call createMarkers when it completes.
+// Perform API 
 d3.json(url).then(function(response) {
   quakeMarkers(response)
   console.log(response)
